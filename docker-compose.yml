@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  django:
+    build: . 
+    command: python manage.py runserver
+    depends_on: 
+      - db
+    ports:
+       - "8000:8000"
+    networks:
+      - xedrum_network
+
+  db:
+    image: postgres:14.6-alpine
+    restart: always
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+       - pg_data:/var/lib/postgresql
+    networks:
+      - xedrum_network
+
+
+volumes:
+  pg_data:
+
+networks:
+  xedrum_network:
+    driver: bridge
