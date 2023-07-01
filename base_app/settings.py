@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 SECRET_KEY = getenv('SECRET_KEY')
-DEBUG = getenv('DEBUG')
+DEBUG = int(getenv('DEBUG'))
 ALLOWED_HOSTS = []
 
 # Application definition
