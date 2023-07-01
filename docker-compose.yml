@@ -23,9 +23,23 @@ services:
     networks:
       - xedrum_network
 
+  nginx:
+    image: nginx:1.25.0-alpine
+    depends_on:
+      - django
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - static_volume:/backend/staticfiles/
+      - media_volume:/backend/mediafiles/
+    networks:
+      - xedrum_network
 
 volumes:
   pg_data:
+  static_volume:
+  media_volume:
 
 networks:
   xedrum_network:
